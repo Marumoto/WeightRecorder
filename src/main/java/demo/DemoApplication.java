@@ -5,6 +5,9 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +16,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -38,7 +42,7 @@ class WeightMvcController {
 	}
 
 	@RequestMapping("weight")
-	String putWeights(@RequestBody Weight requestedWeight, Model model) {
+	String putWeights(@RequestBody @Validated Weight requestedWeight, Model model) {
 
 		this.weightRepository.save(requestedWeight);
 		model.addAttribute("weights", this.weightRepository.findAll());
@@ -57,11 +61,18 @@ class Weight {
 	@GeneratedValue
 	private Long id;
 
+	@NotNull
 	private Date recordDate;
 
-	private int weight1;
+	@NotNull
+	@Min(0)
+	@Max(999)
+	private Integer weight1;
 
-	private int weight2;
+	@NotNull
+	@Min(0)
+	@Max(99)
+	private Integer weight2;
 
 	public Weight() {
 	}
@@ -74,11 +85,11 @@ class Weight {
 		return recordDate;
 	}
 
-	public int getWeight1() {
+	public Integer getWeight1() {
 		return weight1;
 	}
 
-	public int getWeight2() {
+	public Integer getWeight2() {
 		return weight2;
 	}
 
