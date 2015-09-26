@@ -1,6 +1,8 @@
 package demo;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -58,8 +60,17 @@ class WeightMvcController {
 	String putWeights(@Valid WeightForm form, BindingResult bindingResult, // (3)
             Model model, RedirectAttributes attributes) {
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date formatDate = new Date();
+		try {
+			formatDate = sdf.parse(form.getRecordDate());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Weight weight = new Weight();
-		weight.setRecordDate(new Date());
+		weight.setRecordDate(formatDate);
 		weight.setWeight1(Integer.parseInt(form.getWeight1()));
 		weight.setWeight2(Integer.parseInt(form.getWeight2()));
 
