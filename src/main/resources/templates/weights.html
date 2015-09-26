@@ -14,8 +14,8 @@
 
     <div>
         <b th:text="${r.id}">ID</b> -
-        <span th:text="${r.name}">Name</span>
-
+        <span th:text="${#dates.format(r.recordDate, 'yyyy/MM/dd')}">Date</span>
+        <span th:text="${r.weight1}+'.'+${r.weight2}">Weight1</span>
     </div>
 </div>
 

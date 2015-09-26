@@ -1,5 +1,7 @@
 package demo;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -54,21 +56,30 @@ class Weight {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	private String name;
-	
+
+	private Date recordDate;
+
+	private int weight1;
+
+	private int weight2;
+
 	public Weight() {
-	}
-	
-	public Weight(String name) {
-		this.name = name;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public Date getRecordDate() {
+		return recordDate;
 	}
+
+	public int getWeight1() {
+		return weight1;
+	}
+
+	public int getWeight2() {
+		return weight2;
+	}
+
 }
