@@ -42,11 +42,10 @@ class WeightMvcController {
 	}
 
 	@RequestMapping("weight")
-	String putWeights(@RequestBody @Validated Weight requestedWeight, Model model) {
+	String putWeights(@RequestBody @Validated Weight requestedWeight) {
 
 		this.weightRepository.save(requestedWeight);
-		model.addAttribute("weights", this.weightRepository.findAll());
-		return "weights";
+		return "complete";
 	}
 }
 
@@ -58,10 +57,6 @@ interface WeightRepository extends JpaRepository<Weight, Long> {
 class Weight {
 
 	@Id
-	@GeneratedValue
-	private Long id;
-
-	@NotNull
 	private Date recordDate;
 
 	@NotNull
@@ -75,10 +70,6 @@ class Weight {
 	private Integer weight2;
 
 	public Weight() {
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 	public Date getRecordDate() {
